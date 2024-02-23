@@ -17,3 +17,19 @@ model User {
   updatedAt DateTime @updatedAt
   username  String   @unique
 }
+
+model Product {
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
+  createdAt  DateTime  @default(now())
+  id         String    @id @default(cuid())
+  price      Float
+  updatedAt  DateTime  @updatedAt
+}
+
+model Category {
+  createdAt DateTime  @default(now())
+  id        String    @id @default(cuid())
+  products  Product[]
+  updatedAt DateTime  @updatedAt
+}
